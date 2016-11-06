@@ -65,9 +65,9 @@ $basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callb
 # # 32 - Catedral
 $basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C34&_=1478450641441" "(Plaza de Mayo) 32 - Catedral"
 # # 61 - Ministerio de Economía
-$basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C96&_=1478450641443" "(Plaza de Mayo) 61 - Ministerio de Economía"
+$basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C96&_=1478450641443" "(Plaza de Mayo) 61 - Ministerio de Economia"
 # #48 - Perón 
-$basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C57&_=1478450641445" "(Plaza de Mayo) 48 - Perón"
+$basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C57&_=1478450641445" "(Plaza de Mayo) 48 - Peron"
 # # 
 #$basepool+=AddtoPool $id "" " "
 # # 
@@ -110,10 +110,10 @@ $basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callb
 			$temp.Streets=Clear-Accents $Streets
 		}else{
 			$temp.id=$base.id
-			$temp.Station="N/A"
+			$temp.Station="---"
 			$temp.Description=$desc
-			$temp.available="N/A"		
-			$temp.Streets="N/A"		
+			$temp.available="   ---"		
+			$temp.Streets="   ----"		
 		}
 	
 		return $temp	
