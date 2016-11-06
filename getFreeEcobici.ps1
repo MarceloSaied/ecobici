@@ -96,14 +96,16 @@ $basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callb
 		return $res
 	}
 	function get-EcobiciData($url,$desc){
-		$temp=@{}|Select id,Station,Available,Description,Streets
+		$temp=@{}|Select id,Station,Available,State,Description,Streets
 		$WS = Invoke-WebRequest $url
 		if ($WS.RawContentLength -gt 2){
 			$Station=Get-JSonValue 1 $WS.Content
+			$State=Get-JSonValue 2 $WS.Content
 			$available=Get-JSonValue 4 $WS.Content
 			$Streets=Get-JSonValue 3 $WS.Content
 			$Totalpos=Get-JSonValue 6 $WS.Content
 			$temp.id=$base.id
+			$temp.State=$State
 			$temp.Station=$Station
 			$temp.Description=$desc
 			$temp.available=$available + "/" + $Totalpos
@@ -111,6 +113,7 @@ $basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callb
 		}else{
 			$temp.id=$base.id
 			$temp.Station="---"
+			$temp.State="---"
 			$temp.Description=$desc
 			$temp.available="   ---"		
 			$temp.Streets="   ----"		
