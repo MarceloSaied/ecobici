@@ -135,4 +135,4 @@ foreach ($base in $basepool){
 }
 $Output|ft
 "Total=$($Global:TotalBicisAvailable)/$($Global:TotalBicis)"
-
+$Output| Export-Clixml LastStatus.xml
