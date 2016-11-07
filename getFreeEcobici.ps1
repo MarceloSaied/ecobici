@@ -97,7 +97,7 @@ load-data
 	function Get-JSonValue($pos,$J){
 		$toSearch='"posicion": "'+$pos+'"'
 		$res= $($($($J.Split('{')|? {$_ -match $toSearch}).split(",")|?{$_ -match 'valor'}).split(":")|% {$_ -replace '"', '' -replace '}', ''  })[1]
-		return $res
+		return $res.trim()
 	}
 	function get-EcobiciData($url,$desc){
 		$temp=@{}|Select id,Station,Available,State,Description,Streets
