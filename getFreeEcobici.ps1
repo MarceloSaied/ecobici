@@ -4,6 +4,9 @@
 # source web servies 
 #  http://www.buenosaires.gob.ar/ecobici/sistema-ecobici/mapa-bicis
 #
+#-------------------------
+#--       Variables     --
+#-------------------------
 $Global:basepool=@();
 $Global:id=0
 $Global:J=0
