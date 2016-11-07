@@ -9,81 +9,84 @@ $Global:id=0
 $Global:J=0
 $Global:TotalBicisAvailable=0
 $Global:TotalBicis=0
-
-function AddtoPool($id,$url,$name){
-	$bp=@{}|Select id,url,name;$Global:id++
-	$bp.id=$Global:id
-	$bp.url=$url
-	$bp.name=$name
-	return $bp
+if (test-path lastStatus.xml) {
+	$LastStatus = Import-Clixml lastStatus.xml
+}else{
+	$LastStatus =""
 }
-function load-data(){
-	# # 7 - Obelisco 
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C7&_=1478376966560" "(RSP) 7 - Obelisco"
-	# #42 - Diagonal Norte
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery1910687699355588822_1478366828051&id=estaciones_de_bicicletas%7C49&_=1478366828061" "(RSP) 42 - Diagonal Norte"
-	# # 36 - Maipú
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery1910687699355588822_1478366828051&id=estaciones_de_bicicletas%7C36&_=1478366828052" "(RSP) 36 - Maipu"
-	# # 37 - Piedras
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery1910687699355588822_1478366828051&id=estaciones_de_bicicletas%7C37&_=1478366828068"  "(RSP) 37 - Piedras"
-	# # 40 - Sarmiento
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C43&_=1478376966567" "(Swiss medical) 40 - Sarmiento"
-	# # 72 - venezuela
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108738978995493404_1478366170377&id=estaciones_de_bicicletas%7C98&_=1478366170390" "(BBVA Ven) 72 - venezuela"
-	# # 47 - Colegio Nacional Buenos Aires
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108738978995493404_1478366170377&id=estaciones_de_bicicletas%7C56&_=1478366170392" "(BBVA Ven) 47 - Colegio Nacional Buenos Aires"
-	# # 46 - chile
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C46&_=1478376966550" "(BBVA Ven) 46 - chile"
-	# # 19 - Plaza San Martin
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C19&_=1478376966551" "(Plaza San Martín) 19 - Plaza San Martin"
-	# # 53 - Ricardo Rojas
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C48&_=1478376966555" "(Plaza San Martín) 53 - Ricardo Rojas"
-	# # 23 - Suipacha
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C23&_=1478376966553" " 23 - Suipacha"
-	# # 62 - Cordoba
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C47&_=1478376966554" " 62 - Cordoba"
-	# # 55 - Bouchard
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C60&_=1478376966564" "(Microsoft) 55 - Bouchard"
-	# # 4 - Plaza Roma
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C4&_=1478376966563" "(Microsoft) 4 - Plaza Roma"
-	# # 60 - 25 de Mayo
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C50&_=1478376966565" "(Microsoft) 60 - 25 de Mayo"
-	# # 63 - Reconquista
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C99&_=1478376966577" "(Microsoft) 63 - Reconquista"
-	# # 35 - Ingeniero Butty
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C35&_=1478376966571" "(IBM) 35 - Ingeniero Butty"
-	# # 114 - Della Paolera
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C106&_=1478376966573" "(Hilton Retiro) 114 - Della Paolera"
-	# # 95 - Esmeralda
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C89&_=1478376966575" "(Lavalle) 95 - Esmeralda"
-	# #96 - Carlos Gardel 
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C101&_=1478376966583" "(Abasto) 96 - Carlos Gardel"
-	# # 43 - Plaza Houssay
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C54&_=1478376966584" "(Fc.Medicina) 43 - Plaza Houssay"
-	# # 26 - Juana Manso
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C26&_=1478376966588" "(Puerto madero N) 26 - Juana Manso"
-	# # 10 - Madero UCA
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C10&_=1478376966590" "(Puerto madero S) 10 - Madero UCA"
-	# # 3 - Aduana
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C3&_=1478376966593" "(Puerto madero C) 3 - Aduana"
-	# # 32 - Catedral
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C34&_=1478450641441" "(Plaza de Mayo) 32 - Catedral"
-	# # 61 - Ministerio de Economía
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C96&_=1478450641443" "(Plaza de Mayo) 61 - Ministerio de Economia"
-	# #48 - Perón 
-	$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C57&_=1478450641445" "(Plaza de Mayo) 48 - Peron"
-	# # 
-	#$Global:basepool+=AddtoPool $id "" " "
-	# # 
-	#$Global:basepool+=AddtoPool $id "" " "
-	# # 
-	#$Global:basepool+=AddtoPool $id "" " "
-}
-load-data
-
 #-------------------------
 #--       functions     --
 #-------------------------
+	function AddtoPool($id,$url,$name){
+		$bp=@{}|Select id,url,name;$Global:id++
+		$bp.id=$Global:id
+		$bp.url=$url
+		$bp.name=$name
+		return $bp
+	}
+	function load-data(){
+		# # 7 - Obelisco 
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C7&_=1478376966560" "(RSP) 7 - Obelisco"
+		# #42 - Diagonal Norte
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery1910687699355588822_1478366828051&id=estaciones_de_bicicletas%7C49&_=1478366828061" "(RSP) 42 - Diagonal Norte"
+		# # 36 - Maipú
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery1910687699355588822_1478366828051&id=estaciones_de_bicicletas%7C36&_=1478366828052" "(RSP) 36 - Maipu"
+		# # 37 - Piedras
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery1910687699355588822_1478366828051&id=estaciones_de_bicicletas%7C37&_=1478366828068"  "(RSP) 37 - Piedras"
+		# # 40 - Sarmiento
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C43&_=1478376966567" "(Swiss medical) 40 - Sarmiento"
+		# # 72 - venezuela
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108738978995493404_1478366170377&id=estaciones_de_bicicletas%7C98&_=1478366170390" "(BBVA Ven) 72 - venezuela"
+		# # 47 - Colegio Nacional Buenos Aires
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108738978995493404_1478366170377&id=estaciones_de_bicicletas%7C56&_=1478366170392" "(BBVA Ven) 47 - Colegio Nacional Buenos Aires"
+		# # 46 - chile
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C46&_=1478376966550" "(BBVA Ven) 46 - chile"
+		# # 19 - Plaza San Martin
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C19&_=1478376966551" "(Plaza San Martín) 19 - Plaza San Martin"
+		# # 53 - Ricardo Rojas
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C48&_=1478376966555" "(Plaza San Martín) 53 - Ricardo Rojas"
+		# # 23 - Suipacha
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C23&_=1478376966553" " 23 - Suipacha"
+		# # 62 - Cordoba
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C47&_=1478376966554" " 62 - Cordoba"
+		# # 55 - Bouchard
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C60&_=1478376966564" "(Microsoft) 55 - Bouchard"
+		# # 4 - Plaza Roma
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C4&_=1478376966563" "(Microsoft) 4 - Plaza Roma"
+		# # 60 - 25 de Mayo
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C50&_=1478376966565" "(Microsoft) 60 - 25 de Mayo"
+		# # 63 - Reconquista
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C99&_=1478376966577" "(Microsoft) 63 - Reconquista"
+		# # 35 - Ingeniero Butty
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C35&_=1478376966571" "(IBM) 35 - Ingeniero Butty"
+		# # 114 - Della Paolera
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C106&_=1478376966573" "(Hilton Retiro) 114 - Della Paolera"
+		# # 95 - Esmeralda
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C89&_=1478376966575" "(Lavalle) 95 - Esmeralda"
+		# #96 - Carlos Gardel 
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C101&_=1478376966583" "(Abasto) 96 - Carlos Gardel"
+		# # 43 - Plaza Houssay
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C54&_=1478376966584" "(Fc.Medicina) 43 - Plaza Houssay"
+		# # 26 - Juana Manso
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C26&_=1478376966588" "(Puerto madero N) 26 - Juana Manso"
+		# # 10 - Madero UCA
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C10&_=1478376966590" "(Puerto madero S) 10 - Madero UCA"
+		# # 3 - Aduana
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19107030398802171303_1478376966546&id=estaciones_de_bicicletas%7C3&_=1478376966593" "(Puerto madero C) 3 - Aduana"
+		# # 32 - Catedral
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C34&_=1478450641441" "(Plaza de Mayo) 32 - Catedral"
+		# # 61 - Ministerio de Economía
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C96&_=1478450641443" "(Plaza de Mayo) 61 - Ministerio de Economia"
+		# #48 - Perón 
+		$Global:basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callback=jQuery19108965361127637185_1478450641393&id=estaciones_de_bicicletas%7C57&_=1478450641445" "(Plaza de Mayo) 48 - Peron"
+		# # 
+		#$Global:basepool+=AddtoPool $id "" " "
+		# # 
+		#$Global:basepool+=AddtoPool $id "" " "
+		# # 
+		#$Global:basepool+=AddtoPool $id "" " "
+	}
+	load-data
 	function Clear-Accents($word){
 		$word=$word.replace("\u00e1","a") # replace a con acento
 		#$word=$word.replace("\u00e1","a") # replace e con acento
