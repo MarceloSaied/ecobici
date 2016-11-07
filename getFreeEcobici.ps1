@@ -114,12 +114,14 @@ if (test-path lastStatus.xml) {
 			$available=Get-JSonValue 4 $WS.Content
 			$Streets=Get-JSonValue 3 $WS.Content
 			$Totalpos=Get-JSonValue 6 $WS.Content
+
 			$temp.id=$base.id
 			$temp.State=Clear-Accents $State
-			$temp.Station=$Station
+			$temp.Station=Clear-Accents $Station
 			$temp.Description=$desc
 			$temp.available=$available + "/" + $Totalpos
 			$temp.Streets=Clear-Accents $Streets
+
 			$Global:TotalBicisAvailable+=$available
 			$Global:TotalBicis+=$Totalpos
 		}else{
