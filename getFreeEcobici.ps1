@@ -7,6 +7,8 @@
 $basepool=@();
 $Global:id=0
 $Global:J=0
+$Global:TotalBicisAvailable=0
+$Global:TotalBicis=0
 function AddtoPool($id,$url,$name){
 	$bp=@{}|Select id,url,name;$Global:id++
 	$bp.id=$Global:id
@@ -105,11 +107,13 @@ $basepool+=AddtoPool $id "http://epok.buenosaires.gob.ar/getObjectContent/?callb
 			$Streets=Get-JSonValue 3 $WS.Content
 			$Totalpos=Get-JSonValue 6 $WS.Content
 			$temp.id=$base.id
-			$temp.State=$State
+			$temp.State=Clear-Accents $State
 			$temp.Station=$Station
 			$temp.Description=$desc
 			$temp.available=$available + "/" + $Totalpos
 			$temp.Streets=Clear-Accents $Streets
+			$Global:TotalBicisAvailable+=$available
+			$Global:TotalBicis+=$Totalpos
 		}else{
 			$temp.id=$base.id
 			$temp.Station="---"
@@ -129,6 +133,6 @@ foreach ($base in $basepool){
 	$k=get-EcobiciData $($base.url).replace('"','')  $base.name
 	$Output+=$k
 }
-
 $Output|ft
+"Total=$($Global:TotalBicisAvailable)/$($Global:TotalBicis)"
 
